@@ -1,0 +1,60 @@
+amends "package://github.com/jdx/hk/releases/download/v2.5.0/hk@2.5.0#/Config.pkl"
+import "package://github.com/jdx/hk/releases/download/v2.5.0/hk@2.5.0#/Builtins.pkl"
+
+steps {
+  // Data Formats
+  ["tombi"] = Builtins.tombi
+  ["tombi-format"] = (Builtins.tombi_format) {
+    depends = "tombi"
+  }
+
+  // Infrastructure
+  ["actionlint"] = Builtins.actionlint
+  ["droast"] = Builtins.droast
+  ["ghalint-workflow"] = Builtins.ghalint_workflow
+
+  // JavaScript/TypeScript
+  ["biome"] = Builtins.biome
+
+  // Markdown
+  ["rumdl"] = Builtins.rumdl
+  ["rumdl-format"] = (Builtins.rumdl_format) {
+    depends = "rumdl"
+  }
+
+  // Python
+  ["ruff"] = Builtins.ruff
+  ["ruff-format"] = (Builtins.ruff_format) {
+    depends = "ruff"
+  }
+
+  // Shell
+  ["shellharden"] = Builtins.shellharden
+  ["shfmt"] = (Builtins.shfmt) {
+    depends = "shellharden"
+  }
+
+  // Special Purpose
+  ["byte-order-marker"] = Builtins.byte_order_marker
+  ["check-added-large-files"] = Builtins.check_added_large_files
+  ["check-case-conflict"] = Builtins.check_case_conflict
+  ["check-executables-have-shebangs"] = Builtins.check_executables_have_shebangs
+  ["check-merge-conflict"] = Builtins.check_merge_conflict
+  ["check-shebang-scripts-are-executable"] = Builtins.check_shebang_scripts_are_executable
+  ["check-symlinks"] = Builtins.check_symlinks
+  ["destroyed-symlinks"] = Builtins.destroyed_symlinks
+  ["detect-private-key"] = Builtins.detect_private_key
+  ["fix-smart-quotes"] = Builtins.fix_smart_quotes
+  ["forbid-submodules"] = Builtins.forbid_submodules
+  ["mixed-line-ending"] = Builtins.mixed_line_ending
+  ["newlines"] = Builtins.newlines
+  ["trailing-whitespace"] = Builtins.trailing_whitespace
+}
+
+hooks {
+  ["commit-msg"] {
+    steps {
+      ["conventional-commit"] = Builtins.check_conventional_commit
+    }
+  }
+}

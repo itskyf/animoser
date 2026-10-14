@@ -1,0 +1,16 @@
+[tools]
+"github:microsoft/apm" = "latest"
+hk = "latest"
+pixi = "latest"
+rumdl = "latest"
+tombi = "latest"
+
+[deps.apm]
+sources = ["apm.yml", "apm.lock.yaml"]
+outputs = ["apm_modules"]
+run = "apm install --frozen"
+
+[deps.pixi]
+sources = ["pyproject.toml", "pixi.lock"]
+outputs = [".pixi/envs/default", ".pixi/envs/dev"]
+run = "pixi install --all --locked"

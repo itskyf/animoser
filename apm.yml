@@ -1,0 +1,16 @@
+name: animoser
+version: 1.0.0
+description: APM project for animoser
+author: Kỳ
+targets:
+  - antigravity
+  - claude
+  - codex
+dependencies:
+  apm: []
+  mcp: []
+includes: auto
+scripts: {}
+devDependencies:
+  apm:
+    - microsoft/playwright-cli/skills/playwright-cli#v0.1.22

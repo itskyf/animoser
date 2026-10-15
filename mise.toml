@@ -1,7 +1,12 @@
 [tools]
+actionlint = "latest"
+aube = { version = "latest", workflow = ["release-plz.yml@refs/heads/main", "release.yml@refs/heads/main"] }
+biome = "latest"
+ghalint = "latest"
 "github:microsoft/apm" = "latest"
 hk = "latest"
 pixi = "latest"
+ruff = "latest"
 rumdl = "latest"
 tombi = "latest"
 

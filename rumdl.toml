@@ -1,0 +1,6 @@
+[global]
+disable = ["line-length"]
+
+[per-file-ignores]
+".github/ISSUE_TEMPLATE/*.md" = ["MD041"]
+".github/pull_request_template.md" = ["MD041"]

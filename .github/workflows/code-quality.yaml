@@ -1,0 +1,46 @@
+name: Code Quality
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-slim
+    timeout-minutes: 10
+    permissions:
+      contents: read
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          # Fetch HEAD and HEAD^1 for hk check.
+          fetch-depth: 2
+          persist-credentials: false
+
+      - uses: jdx/mise-action@08ae2a091c038e1e05ec6f5115dc5c69d5a2a6b8 # v5.1.2
+
+      - if: github.event_name == 'pull_request'
+        run: |
+          if git diff --quiet HEAD^1 HEAD -- \
+            .github \
+            hk.pkl \
+            mise.lock \
+            mise.toml \
+            pyproject.toml \
+            ruff.toml \
+            rumdl.toml \
+            tombi.toml; then
+            hk check --from-ref HEAD^1 --to-ref HEAD
+          else
+            hk check --all
+          fi
+
+      - if: github.event_name == 'push'
+        run: hk check --all
